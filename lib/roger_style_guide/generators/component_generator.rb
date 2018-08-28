@@ -12,7 +12,7 @@ module RogerStyleGuide::Generators
     class_option(
       :components_path,
       type: :string,
-      desc: "Components path, default: roger.project.html_path/#{RogerStyleGuide.components_path}"
+      desc: "Components path, default: roger.project.html_path/#{RogerStyleGuide.components_paths[0]}"
     )
 
     class_option(
@@ -66,7 +66,7 @@ module RogerStyleGuide::Generators
     def components_path
       options[:components_path] && Pathname.new(options[:components_path]) ||
         Roger::Cli::Base.project &&
-          Roger::Cli::Base.project.html_path + RogerStyleGuide.components_path
+          Roger::Cli::Base.project.html_path + RogerStyleGuide.components_paths[0]
     end
 
     def project_template_path

@@ -3,12 +3,12 @@ require "pathname"
 # Toplevel module for all things concerning RogerStyleGuide
 module RogerStyleGuide
   # The path within project.html_path where the components reside
-  def self.components_path=(path)
-    @components_path = Pathname.new(path)
+  def self.components_paths=(path)
+    @components_paths = [Pathname.new(path)]
   end
 
-  def self.components_path
-    @components_path || "components"
+  def self.components_paths
+    @components_paths || ["components"]
   end
 end
 

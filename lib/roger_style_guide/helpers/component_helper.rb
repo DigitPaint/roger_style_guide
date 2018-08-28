@@ -26,17 +26,19 @@ module RogerStyleGuide::Helpers::ComponentHelper
     extension = File.extname(name)[1..-1]
     name_without_extension = extension ? name.sub(/\.#{Regexp.escape(extension)}\Z/, "") : name
 
-    dir = File.join(
-      RogerStyleGuide.components_path,
-      path.slice(0, path.size - name.size).to_s.strip
-    )
+    dirs = RogerStyleGuide.components_paths.inject([]) do |dirs, components_path|
+      dir = File.join(
+        components_path,
+        path.slice(0, path.size - name.size).to_s.strip
+      )
 
-    [
-      # component_path/name/_name.xyz
-      File.join(dir, name_without_extension, local_name),
-      # component_path/name
-      File.join(dir, name)
-    ]
+      dirs += [
+        # component_path/name/_name.xyz
+        File.join(dir, name_without_extension, local_name),
+        # component_path/name
+        File.join(dir, name)
+      ]
+    end
   end
 end
 
