@@ -4,7 +4,7 @@ require "pathname"
 module RogerStyleGuide
   # The path within project.html_path where the components reside
   def self.components_paths=(path)
-    @components_paths = [Pathname.new(path)]
+    @components_paths = [path].flatten.map{|p| Pathname.new(p)}
   end
 
   def self.components_paths
